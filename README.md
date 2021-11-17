@@ -1,6 +1,6 @@
 Тестовое задание на позицию Junior programmer (Python)
 
-**Задание 1.** На языке Python написать алгоритм (функцию) определения четности целого числа, который будет аналогичен нижеприведенному по функциональности, но отличен по своей сути.
+**Задание 1.** На языке Python написать алгоритм (функцию) определения четности целого числа, который будет аналогичен нижеприведенному по функциональности, но отличен по своей сути. Объяснить плюсы и минусы обеих реализаций.
 
 Исходный код:
 def isEven(value):
@@ -26,16 +26,46 @@ def isEven2(value):
 
 Таким образом, первый код более оптимальный для использования, но не значительно.
 
-**Задание 2** На языках Python(2.7) написать минимум по 2 класса реализовывающих циклический буфер.
+**Задание 2** На языках Python(2.7) написать минимум по 2 класса реализовывающих циклический буфер. Объяснить плюсы и минусы каждой реализации.
 
 Реализация через индексы: [Код тут](https://github.com/EkaterinaToporkova/Test/blob/main/%D0%A0%D0%B5%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%20%D1%87%D0%B5%D1%80%D0%B5%D0%B7%20%D0%B8%D0%BD%D0%B4%D0%B5%D0%BA%D1%81%D1%8B)
 
-Реализция с помощью связных списков: [Код тут](https://github.com/EkaterinaToporkova/Test/blob/main/%D0%A0%D0%B5%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%20%D1%81%20%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E%20%D1%81%D0%B2%D1%8F%D0%B7%D0%BD%D1%8B%D1%85%20%D1%81%D0%BF%D0%B8%D1%81%D0%BA%D0%BE%D0%B2:)
 
+Реализация с помощью связных списков: [Код тут](https://github.com/EkaterinaToporkova/Test/blob/main/%D0%A0%D0%B5%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%20%D1%81%20%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E%20%D1%81%D0%B2%D1%8F%D0%B7%D0%BD%D1%8B%D1%85%20%D1%81%D0%BF%D0%B8%D1%81%D0%BA%D0%BE%D0%B2:)
 
+Реализация с помощью списков будет лучше, потому что при каждом изменении массива не надо будет делать перемещение элементов. Но, однако же, в списке все еще требуется больше памяти.
 
+**Задание 3** На языке Python написать функцию, которая быстрее всего (по процессорным тикам) отсортирует данный ей массив чисел.
+Массив может быть любого размера со случайным порядком чисел (в том числе и отсортированным).
+Объяснить почему вы считаете, что функция соответствует заданным критериям.
 
+В первую очередь я бы хотела отбросить "медленные" сортировки: Bubble Sort, Selection Sort, Insertion Sort, потому что они тратят слишком много времени на сортировку больших списков.
 
+По-моему мнению для такой работы лучше всего подходит "QuickSort".
+
+def partition(array, begin, end):
+    pivot_idx = begin
+    for i in xrange(begin+1, end+1):
+        if array[i] <= array[begin]:
+            pivot_idx += 1
+            array[i], array[pivot_idx] = array[pivot_idx], array[i]
+    array[pivot_idx], array[begin] = array[begin], array[pivot_idx]
+    return pivot_idx
+
+def quick_sort_recursion(array, begin, end):
+    if begin >= end:
+        return
+    pivot_idx = partition(array, begin, end)
+    quick_sort_recursion(array, begin, pivot_idx-1)
+    quick_sort_recursion(array, pivot_idx+1, end)
+
+def quick_sort(array, begin=0, end=None):
+    if end is None:
+        end = len(array) - 1
+    
+    return quick_sort_recursion(array, begin, end)
+    
+    
 
 
 
