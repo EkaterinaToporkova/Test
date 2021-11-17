@@ -45,7 +45,7 @@ def isEven2(value):
 
 Код можно посмотреть [Здесь](https://github.com/EkaterinaToporkova/Test/blob/main/QuickSort)
     
-    
+Спасибо, что рассмотрели мое резюме и ответы на тестовое задание!
 
 
 
